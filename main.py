@@ -5,17 +5,15 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import requests
+import os
 
-# params={"api_key": MOVIE_DB_API_KEY, "query": movie_title}
-# Movie BD api: cb3667269fb6fbf10bc31d163e2cc571
-# api_request_token: "6bc047b88f669d1fb86574f06381005d93d3517a"
 '''
 ?query=Avatar
 '''
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get('MOVIE_DB_SECRET_KEY')
 Bootstrap(app)
 
 
@@ -95,7 +93,7 @@ def add():
     if form.validate_on_submit():
         url = f"https://api.themoviedb.org/3/search/movie"
         parameters = {
-            'api_key': 'cb3667269fb6fbf10bc31d163e2cc571',
+            'api_key': os.environ.get('MOVIE_DB_API'),
             'query': form.add.data,
         }
         response = requests.get(url=url, params=parameters)
@@ -121,7 +119,7 @@ def find_movie():
         image_url = "https://image.tmdb.org/t/p/w500"
         url = f"https://api.themoviedb.org/3/movie/{movie_id}"
         parameters = {
-            'api_key': 'cb3667269fb6fbf10bc31d163e2cc571',
+            'api_key': os.environ.get('MOVIE_DB_API'),
             "language": "en-US"
         }
         response = requests.get(url=url, params=parameters)
