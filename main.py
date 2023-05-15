@@ -14,7 +14,7 @@ Bootstrap(app)
 
 
 # We can use the SQlAlchemy to also create the data base instead of using the sqlite3 as we have above
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', "sqlite:///movie-collection.db") #"sqlite:///movie-collection.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') #"sqlite:///movie-collection.db"
 # Optional: But it will silence the deprecation warning in the console.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
