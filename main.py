@@ -9,7 +9,7 @@ import os
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SECRET_KEY'] = os.environ.get('MOVIE_DB_SECRET_KEY')
+app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 Bootstrap(app)
 
 
@@ -89,7 +89,7 @@ def add():
     if form.validate_on_submit():
         url = f"https://api.themoviedb.org/3/search/movie"
         parameters = {
-            'api_key': os.environ.get('MOVIE_DB_API'),
+            'api_key': 'cb3667269fb6fbf10bc31d163e2cc571',
             'query': form.add.data,
         }
         response = requests.get(url=url, params=parameters)
@@ -115,7 +115,7 @@ def find_movie():
         image_url = "https://image.tmdb.org/t/p/w500"
         url = f"https://api.themoviedb.org/3/movie/{movie_id}"
         parameters = {
-            'api_key': os.environ.get('MOVIE_DB_API'),
+            'api_key': 'cb3667269fb6fbf10bc31d163e2cc571',
             "language": "en-US"
         }
         response = requests.get(url=url, params=parameters)
