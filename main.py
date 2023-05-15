@@ -7,10 +7,6 @@ from wtforms.validators import DataRequired
 import requests
 import os
 
-'''
-?query=Avatar
-'''
-
 app = Flask(__name__)
 app.app_context().push()
 app.config['SECRET_KEY'] = os.environ.get('MOVIE_DB_SECRET_KEY')
