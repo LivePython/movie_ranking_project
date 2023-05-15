@@ -9,12 +9,12 @@ import os
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 Bootstrap(app)
 
 
 # We can use the SQlAlchemy to also create the data base instead of using the sqlite3 as we have above
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///movie-collection.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 # Optional: But it will silence the deprecation warning in the console.
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -89,7 +89,7 @@ def add():
     if form.validate_on_submit():
         url = f"https://api.themoviedb.org/3/search/movie"
         parameters = {
-            'api_key': 'cb3667269fb6fbf10bc31d163e2cc571',
+            'api_key': os.environ.get('API_KEY'),
             'query': form.add.data,
         }
         response = requests.get(url=url, params=parameters)
@@ -115,7 +115,7 @@ def find_movie():
         image_url = "https://image.tmdb.org/t/p/w500"
         url = f"https://api.themoviedb.org/3/movie/{movie_id}"
         parameters = {
-            'api_key': 'cb3667269fb6fbf10bc31d163e2cc571',
+            'api_key': os.environ.get('API_KEY'),
             "language": "en-US"
         }
         response = requests.get(url=url, params=parameters)
